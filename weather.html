@@ -36,7 +36,7 @@
         return parent.appendChild(el); // Append the second parameter(element) to the first one
     }
 
-    const url = "http://api.openweathermap.org/data/2.5/weather?lat=20.2941345&lon=86.2975367&appid=74255f3740267f1dc8123434f7485ac0"
+    const url = "https://api.openweathermap.org/data/2.5/weather?lat=20.2941345&lon=86.2975367&appid=74255f3740267f1dc8123434f7485ac0"
 
     fetch(url)
         .then(resp => resp.json())
