@@ -108,10 +108,7 @@
 
 
     function getData(position) {
-        var inlat = position.coords.latitude;
-        var  inlon = position.coords.longitude;
-        document.getElementById('loc').innerHTML = inlat + "," + inlon;
-        var url = "https://api.openweathermap.org/data/2.5/weather?"+ "lat=" +inlat+ "&lon=" + inlon+ "&appid=74255f3740267f1dc8123434f7485ac0"
+        var url = "https://api.openweathermap.org/data/2.5/weather?"+ "lat=" +position.coords.latitude+ "&lon=" +position.coords.longitude+ "&appid=74255f3740267f1dc8123434f7485ac0"
         fetch(url)
             .then(resp => resp.json())
             .then((data) => {
