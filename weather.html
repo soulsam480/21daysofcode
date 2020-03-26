@@ -94,7 +94,7 @@
    
     function getLocation() {
         if (navigator.geolocation) {
-            navigator.geolocation.getCurrentPosition(showPosition);
+            navigator.geolocation.getCurrentPosition(getData);
         } else {
             x.innerHTML = "Geolocation is not supported by this browser.";
         }
@@ -106,9 +106,12 @@
     }
 
 
-    const url = "https://api.openweathermap.org/data/2.5/weather?lat={inlat}&{inlon}&appid=74255f3740267f1dc8123434f7485ac0"
 
-    function getData(inlat,inlon) {
+    function getData(position) {
+        const inlat = position.coords.latitude;
+        const inlon = position.coords.longitude;\
+        console.log('success')
+        const url = "https://api.openweathermap.org/data/2.5/weather?lat={inlat}&{inlon}&appid=74255f3740267f1dc8123434f7485ac0"
         fetch(url)
             .then(resp => resp.json())
             .then((data) => {
@@ -146,7 +149,7 @@
 
             })
     }
-    window.onload = getdata()
+    window.onload = getData()
 </script>
 
 
