@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Apis</title>
+</head>
+
+<body>
+    <div id="wrapper">
+        <ul id="coor">
+
+        </ul>
+        <ul id="weather">
+
+
+        </ul>
+        <ul id="main">
+
+        </ul>
+        <ul id="wind">
+
+        </ul>
+    </div>
+</body>
+
+
+<script>
+
+    function createNode(element) {
+        return document.createElement(element); // Create the type of element you pass in the parameters
+    }
+
+    function append(parent, el) {
+        return parent.appendChild(el); // Append the second parameter(element) to the first one
+    }
+
+    const url = "http://api.openweathermap.org/data/2.5/weather?lat=20.2941345&lon=86.2975367&appid=74255f3740267f1dc8123434f7485ac0"
+
+    fetch(url)
+        .then(resp => resp.json())
+        .then((data) => {
+            console.log(data)
+            let coor = data.coord
+            weather = data.weather
+            main = data.main
+            wind = data.wind
+
+            console.log(main)
+            console.log(wind)
+            const wt = document.getElementById('weather')
+            const mn = document.getElementById('main')
+            const wi = document.getElementById('wind')
+            const co = document.getElementById('coor')
+
+
+            for (let [key, value] of Object.entries(coor)) {
+                li5 = createNode("li");
+                li5.innerHTML = `${key}: ${value}`
+                append(co, li5)
+                console.log(`${key}: ${value}`);
+            }
+
+            weather.map(item => {
+                let li = createNode("li");
+                li2 = createNode("li");
+                li.innerHTML = item.main
+                li2.innerHTML = item.description
+                append(wt, li)
+                append(wt, li2)
+            });
+
+            for (let [key, value] of Object.entries(main)) {
+                li3 = createNode("li");
+                li3.innerHTML = `${key}: ${value}`
+                append(mn, li3)
+                console.log(`${key}: ${value}`);
+            }
+
+            for (let [key, value] of Object.entries(wind)) {
+                li4 = createNode("li");
+                li4.innerHTML = `${key}: ${value}`
+                append(wi, li4)
+                console.log(`${key}: ${value}`);
+            }
+
+
+
+
+        })
+
+</script>
+
+
+</html>
