@@ -37,10 +37,11 @@
             color: #4ecca3 !important;
 
         }
-        .btn{
+
+        .btn {
             background-color: #393e46;
 
-            color:#4ecca3;
+            color: #4ecca3;
         }
     </style>
 </head>
@@ -50,7 +51,7 @@
     <h2 class="text-center py-3">CURRENT WEATHER</h2>
     <p class="text-center">Get the current weather of your location by</p>
     <div class="text-center">
-        <button onclick="getLocation()" class="text-center btn " >My Location</button>
+        <button onclick="getLocation()" class="text-center btn ">My Location</button>
 
     </div>
     <div class="py-4 row d-flex  flex-row wrap">
@@ -98,7 +99,7 @@
 
 
 <script>
-   
+
     function getLocation() {
         if (navigator.geolocation) {
             navigator.geolocation.getCurrentPosition(getData);
@@ -108,14 +109,14 @@
     }
 
     function showPosition(position) {
-       console.log(position.coords.latitude) 
-       
+        console.log(position.coords.latitude)
+
     }
 
 
 
     function getData(position) {
-        var url = "https://api.openweathermap.org/data/2.5/weather?"+ "lat=" +position.coords.latitude+ "&lon=" +position.coords.longitude+ "&units=metric&appid=74255f3740267f1dc8123434f7485ac0"
+        var url = "https://api.openweathermap.org/data/2.5/weather?" + "lat=" + position.coords.latitude + "&lon=" + position.coords.longitude + "&units=metric&appid=74255f3740267f1dc8123434f7485ac0"
         fetch(url)
             .then(resp => resp.json())
             .then((data) => {
@@ -123,6 +124,7 @@
                 weather = data.weather
                 main = data.main
                 wind = data.wind
+
                 var lat = document.getElementById('lat')
                 lon = document.getElementById('lon')
                 nat = document.getElementById('nat')
