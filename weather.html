@@ -45,7 +45,8 @@
 <body class="container-fluid ">
 
     <h2 class="text-center py-3">CURRENT WEATHER</h2>
-
+    <button onclick="getLocation()"> get location</button>
+    <p id="loc"></p>
     <div class="py-4 row d-flex  flex-row wrap">
         <br>
 
@@ -82,53 +83,70 @@
         </ul>
     </div>
     <footer class="text-center">
-        With 🧡 from <a href="https://sambitsahoo.cf">Sambit Sahoo</a><br> using <a href="https://openweathermap.org">Open
+        With 🧡 from <a href="https://sambitsahoo.cf">Sambit Sahoo</a><br> using <a
+            href="https://openweathermap.org">Open
             Weather Map</a>
     </footer>
 </body>
 
 
 <script>
+   
+    function getLocation() {
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(showPosition);
+        } else {
+            x.innerHTML = "Geolocation is not supported by this browser.";
+        }
+    }
 
-    const url = "https://api.openweathermap.org/data/2.5/weather?lat=20.2941345&lon=86.2975367&appid=74255f3740267f1dc8123434f7485ac0"
-
-    fetch(url)
-        .then(resp => resp.json())
-        .then((data) => {
-            let coor = data.coord
-            weather = data.weather
-            main = data.main
-            wind = data.wind
-            var lat = document.getElementById('lat')
-            lon = document.getElementById('lon')
-            nat = document.getElementById('nat')
-            des = document.getElementById('des')
-            temp = document.getElementById('temp')
-            feel = document.getElementById('feel')
-            tmin = document.getElementById('tmin')
-            tmax = document.getElementById('tmax')
-            prs = document.getElementById('prs')
-            hum = document.getElementById('hum')
-            speed = document.getElementById('speed')
-            deg = document.getElementById('deg')
-
-            lat.innerHTML = 'Latitude: ' + coor.lat;
-            lon.innerHTML = 'Longitude: ' + coor.lon;
-            nat.innerHTML = 'Nature: ' + weather[0].main;
-            des.innerHTML = 'Description: ' + weather[0].description
-            temp.innerHTML = 'Temperature: ' + main.temp + ' K'
-            feel.innerHTML = 'Feels Like: ' + main.feels_like + ' K'
-            tmin.innerHTML = 'Min. Temperature: ' + main.temp_min + ' K'
-            tmax.innerHTML = 'Max. temperature ' + main.temp_max + ' K'
-            prs.innerHTML = 'Pressure: ' + main.pressure + ' hPa'
-            hum.innerHTML = 'Humidity: ' + main.humidity + ' K'
-            speed.innerHTML = 'Speed: ' + wind.speed + ' m/s'
-            deg.innerHTML = 'Degree: ' + wind.deg + ' Deg'
+    function showPosition(position) {
+       console.log(position.coords.latitude) 
+       document.getElementById('loc').innerHTML = position.coords.latitude;
+    }
 
 
+    const url = "https://api.openweathermap.org/data/2.5/weather?lat={inlat}&{inlon}&appid=74255f3740267f1dc8123434f7485ac0"
 
-        })
+    function getData(inlat,inlon) {
+        fetch(url)
+            .then(resp => resp.json())
+            .then((data) => {
+                let coor = data.coord
+                weather = data.weather
+                main = data.main
+                wind = data.wind
+                var lat = document.getElementById('lat')
+                lon = document.getElementById('lon')
+                nat = document.getElementById('nat')
+                des = document.getElementById('des')
+                temp = document.getElementById('temp')
+                feel = document.getElementById('feel')
+                tmin = document.getElementById('tmin')
+                tmax = document.getElementById('tmax')
+                prs = document.getElementById('prs')
+                hum = document.getElementById('hum')
+                speed = document.getElementById('speed')
+                deg = document.getElementById('deg')
 
+                lat.innerHTML = 'Latitude: ' + coor.lat;
+                lon.innerHTML = 'Longitude: ' + coor.lon;
+                nat.innerHTML = 'Nature: ' + weather[0].main;
+                des.innerHTML = 'Description: ' + weather[0].description
+                temp.innerHTML = 'Temperature: ' + main.temp + ' K'
+                feel.innerHTML = 'Feels Like: ' + main.feels_like + ' K'
+                tmin.innerHTML = 'Min. Temperature: ' + main.temp_min + ' K'
+                tmax.innerHTML = 'Max. temperature ' + main.temp_max + ' K'
+                prs.innerHTML = 'Pressure: ' + main.pressure + ' hPa'
+                hum.innerHTML = 'Humidity: ' + main.humidity + ' K'
+                speed.innerHTML = 'Speed: ' + wind.speed + ' m/s'
+                deg.innerHTML = 'Degree: ' + wind.deg + ' Deg'
+
+
+
+            })
+    }
+    window.onload = getdata()
 </script>
 
 
