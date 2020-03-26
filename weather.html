@@ -115,7 +115,7 @@
 
 
     function getData(position) {
-        var url = "https://api.openweathermap.org/data/2.5/weather?"+ "lat=" +position.coords.latitude+ "&lon=" +position.coords.longitude+ "&appid=74255f3740267f1dc8123434f7485ac0"
+        var url = "https://api.openweathermap.org/data/2.5/weather?"+ "lat=" +position.coords.latitude+ "&lon=" +position.coords.longitude+ "&units=metric&appid=74255f3740267f1dc8123434f7485ac0"
         fetch(url)
             .then(resp => resp.json())
             .then((data) => {
