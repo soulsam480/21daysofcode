@@ -2,89 +2,128 @@
 <html lang="en">
 
 <head>
+    <link rel="dns-prefetch preconnect" href="https://fonts.gstatic.com">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Weather Apis</title>
+    <link rel="stylesheet" href="./bootstrap/bootstrap.min.css">
+    <script src="./bootstrap/bootstrap.min.js"></script>
+    <script src="./bootstrap/jquery-3.3.1.slim.min.js"></script>
+    <link href="https://fonts.googleapis.com/css?family=Sen&display=swap" rel="stylesheet">
+
+    <title>Weather js</title>
+    <style>
+        body {
+            background-color: #232931;
+            color: #eeeeee;
+            font-family: 'Sen', sans-serif !important;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+
+        .wrap ul li {
+            margin: 5px;
+            padding: 10px;
+            background-color: #393e46;
+            color: #4ecca3;
+            font-size: 20px;
+        }
+
+        a:hover {
+            text-decoration: none;
+        }
+
+        a {
+            color: #4ecca3 !important;
+
+        }
+    </style>
 </head>
 
-<body>
-    <div id="wrapper">
-        <ul id="coor">
+<body class="container-fluid ">
+
+    <h2 class="text-center py-3">CURRENT WEATHER</h2>
+
+    <div class="py-4 row d-flex  flex-row wrap">
+        <br>
+
+        <ul id="coor" class="col-sm">
+            <h5 class="text-center">Location</h5>
+            <li id="lat"></li>
+            <li id="lon"></li>
 
         </ul>
-        <ul id="weather">
+        <br>
+        <ul id="weather" class="col-sm">
+            <h5 class="text-center"> Weather</h5>
+            <li id="nat"></li>
+            <li id="des"></li>
+
+        </ul>
+        <br>
+        <ul id="main" class="col-sm">
+            <h5 class="text-center">Temperature</h5>
+            <li id="temp"></li>
+            <li id="feel"></li>
+            <li id="tmin"></li>
+            <li id="tmax"></li>
+            <li id="prs"></li>
+            <li id="hum"></li>
 
 
         </ul>
-        <ul id="main">
-
-        </ul>
-        <ul id="wind">
-
+        <br>
+        <ul id="wind" class="col-sm">
+            <h5 class="text-center">Wind</h5>
+            <li id="speed"></li>
+            <li id="deg"></li>
         </ul>
     </div>
+    <footer class="text-center">
+        With 🧡 from <a href="https://sambitsahoo.cf">Sambit Sahoo</a><br> using <a href="https://openweathermap.org">Open
+            Weather Map</a>
+    </footer>
 </body>
 
 
 <script>
-
-    function createNode(element) {
-        return document.createElement(element); // Create the type of element you pass in the parameters
-    }
-
-    function append(parent, el) {
-        return parent.appendChild(el); // Append the second parameter(element) to the first one
-    }
 
     const url = "https://api.openweathermap.org/data/2.5/weather?lat=20.2941345&lon=86.2975367&appid=74255f3740267f1dc8123434f7485ac0"
 
     fetch(url)
         .then(resp => resp.json())
         .then((data) => {
-            console.log(data)
             let coor = data.coord
             weather = data.weather
             main = data.main
             wind = data.wind
+            var lat = document.getElementById('lat')
+            lon = document.getElementById('lon')
+            nat = document.getElementById('nat')
+            des = document.getElementById('des')
+            temp = document.getElementById('temp')
+            feel = document.getElementById('feel')
+            tmin = document.getElementById('tmin')
+            tmax = document.getElementById('tmax')
+            prs = document.getElementById('prs')
+            hum = document.getElementById('hum')
+            speed = document.getElementById('speed')
+            deg = document.getElementById('deg')
 
-            console.log(main)
-            console.log(wind)
-            const wt = document.getElementById('weather')
-            const mn = document.getElementById('main')
-            const wi = document.getElementById('wind')
-            const co = document.getElementById('coor')
-
-
-            for (let [key, value] of Object.entries(coor)) {
-                li5 = createNode("li");
-                li5.innerHTML = `${key}: ${value}`
-                append(co, li5)
-                console.log(`${key}: ${value}`);
-            }
-
-            weather.map(item => {
-                let li = createNode("li");
-                li2 = createNode("li");
-                li.innerHTML = item.main
-                li2.innerHTML = item.description
-                append(wt, li)
-                append(wt, li2)
-            });
-
-            for (let [key, value] of Object.entries(main)) {
-                li3 = createNode("li");
-                li3.innerHTML = `${key}: ${value}`
-                append(mn, li3)
-                console.log(`${key}: ${value}`);
-            }
-
-            for (let [key, value] of Object.entries(wind)) {
-                li4 = createNode("li");
-                li4.innerHTML = `${key}: ${value}`
-                append(wi, li4)
-                console.log(`${key}: ${value}`);
-            }
-
+            lat.innerHTML = 'Latitude: ' + coor.lat;
+            lon.innerHTML = 'Longitude: ' + coor.lon;
+            nat.innerHTML = 'Nature: ' + weather[0].main;
+            des.innerHTML = 'Description: ' + weather[0].description
+            temp.innerHTML = 'Temperature: ' + main.temp + ' K'
+            feel.innerHTML = 'Feels Like: ' + main.feels_like + ' K'
+            tmin.innerHTML = 'Min. Temperature: ' + main.temp_min + ' K'
+            tmax.innerHTML = 'Max. temperature ' + main.temp_max + ' K'
+            prs.innerHTML = 'Pressure: ' + main.pressure + ' hPa'
+            hum.innerHTML = 'Humidity: ' + main.humidity + ' K'
+            speed.innerHTML = 'Speed: ' + wind.speed + ' m/s'
+            deg.innerHTML = 'Degree: ' + wind.deg + ' Deg'
 
 
 
