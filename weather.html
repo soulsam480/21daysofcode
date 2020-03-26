@@ -102,16 +102,16 @@
 
     function showPosition(position) {
        console.log(position.coords.latitude) 
-       document.getElementById('loc').innerHTML = position.coords.latitude;
+       
     }
 
 
 
     function getData(position) {
-        const inlat = position.coords.latitude;
-        const inlon = position.coords.longitude;\
-        console.log('success')
-        const url = "https://api.openweathermap.org/data/2.5/weather?lat={inlat}&{inlon}&appid=74255f3740267f1dc8123434f7485ac0"
+        var inlat = position.coords.latitude;
+        var  inlon = position.coords.longitude;
+        document.getElementById('loc').innerHTML = inlat + "," + inlon;
+        const url = "https://api.openweathermap.org/data/2.5/weather?lat='+inlat+'&'+inlon+'&appid=74255f3740267f1dc8123434f7485ac0"
         fetch(url)
             .then(resp => resp.json())
             .then((data) => {
