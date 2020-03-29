@@ -107,7 +107,15 @@
             };
             currentPath.push(point);
         }
-
+        if (touches) {
+            const point = {
+                x: mouseX,
+                y: mouseY,
+                color: colorInput.value,
+                weight: weight.value
+            };
+            currentPath.push(point);
+        }
         paths.forEach(path => {
             beginShape();
             path.forEach(point => {
