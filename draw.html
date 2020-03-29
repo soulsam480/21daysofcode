@@ -7,13 +7,16 @@
     <title>Draw.js</title>
     <script src="./assets/p5.min.js"></script>
     <style>
-        html,body{
+        html,
+        body {
             padding: 0;
             margin: 0;
         }
-        canvas{
+
+        canvas {
             position: relative;
         }
+
         .sidebar {
             background-color: #333;
             box-shadow: 0px 0px 10px rgba(30, 30, 30, 0.7);
@@ -28,7 +31,7 @@
         .sidebar ul {
             display: flex;
             justify-content: left;
-            align-items:flex-start;
+            align-items: flex-start;
             flex-direction: row;
             list-style-type: none;
             padding: 0;
@@ -107,15 +110,6 @@
             };
             currentPath.push(point);
         }
-        if (touches) {
-            const point = {
-                x: mouseX,
-                y: mouseY,
-                color: colorInput.value,
-                weight: weight.value
-            };
-            currentPath.push(point);
-        }
         paths.forEach(path => {
             beginShape();
             path.forEach(point => {
@@ -131,14 +125,17 @@
         currentPath = [];
         paths.push(currentPath);
     }
-
+    function touchStarted() {
+        currentPath = [];
+        paths.push(currentPath);
+    }
     clear.addEventListener('click', () => {
         paths.splice(0);
         background(255);
     });
 </script>
 <script>
-        canvas = document.getElementsByClassName('p5Canvas');
+    canvas = document.getElementsByClassName('p5Canvas');
     window.addEventListener('resize', resizeCanvas, false);
     window.addEventListener('orientationchange', resizeCanvas, false);
     resizeCanvas();
